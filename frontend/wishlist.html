@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - StyleShop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header (same as products.html) -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="index.html">StyleShop</a>
+                </div>
+                <nav>
+                    <ul id="menu-items">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-icons">
+                    <div class="user-profile" onclick="toggleUserDropdown()">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+                            alt="User" class="user-avatar">
+                        <div class="user-info-small">
+                            <span class="user-name">Mostafa Monsef</span>
+                            <span class="user-email">mostafa@example.com</span>
+                        </div>
+                        <div class="user-dropdown">
+                            <a href="profile.html">Profile</a>
+                            <a href="Account.html">My Account</a>
+                            <a href="wishlist.html">My Wishlist</a>
+                            <a href="#" onclick="logout()">Logout</a>
+                        </div>
+                    </div>
+                    <a href="wishlist.html" class="wishlist-icon active">
+                        <i class="fas fa-heart"></i>
+                        <span class="wishlist-count">0</span>
+                    </a>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <div class="menu-icon" onclick="toggleMenu()">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Wishlist Section -->
+    <section class="cart-hero">
+        <div class="container">
+            <h1>My Wishlist</h1>
+            <p>Your favorite products</p>
+        </div>
+    </section>
+
+    <section class="cart-section">
+        <div class="container">
+            <div class="wishlist-container">
+                <div class="wishlist-header">
+                    <h2>Your Wishlist (<span id="wishlist-items-count">0</span> items)</h2>
+                </div>
+                <div id="wishlist-items-list">
+                    <!-- Wishlist items will be populated here -->
+                </div>
+                <div class="empty-wishlist" id="empty-wishlist">
+                    <i class="fas fa-heart"></i>
+                    <h3>Your wishlist is empty</h3>
+                    <p style="margin-bottom: 10px">Start adding products you love to your wishlist</p>
+                    <a href="products.html" class="btn">Browse Products</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as products.html) -->
+    <footer class="footer-enhanced">
+        <!-- Same footer as products.html -->
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        async function loadWishlist() {
+            console.log("wishlist.html loadWishlist: currentUser =", currentUser);
+            if (!currentUser) {
+                showAuthModal();
+                return;
+            }
+
+            try {
+                console.log("wishlist.html loadWishlist: Calling api.getWishlist");
+                const data = await api.getWishlist();
+                console.log("wishlist.html loadWishlist: API response data =", data);
+                wishlistData = data;
+                const wishlistItems = data.items || [];
+                console.log("wishlist.html loadWishlist: wishlistItems =", wishlistItems);
+                const wishlistItemsList = document.getElementById('wishlist-items-list');
+                const emptyWishlist = document.getElementById('empty-wishlist');
+                const wishlistItemsCount = document.getElementById('wishlist-items-count');
+
+                // Update wishlist count
+                wishlistItemsCount.textContent = wishlistItems.length;
+                updateWishlistCount();
+
+                if (wishlistItems.length === 0) {
+                    console.log("wishlist.html loadWishlist: No items, showing empty");
+                    wishlistItemsList.style.display = 'none';
+                    emptyWishlist.style.display = 'block';
+                    return;
+                }
+
+                console.log("wishlist.html loadWishlist: Rendering", wishlistItems.length, "items");
+                wishlistItemsList.style.display = 'block';
+                emptyWishlist.style.display = 'none';
+
+                // Render wishlist items
+                wishlistItemsList.innerHTML = '';
+
+                wishlistItems.forEach(item => {
+                    const wishlistItem = document.createElement('div');
+                    wishlistItem.className = 'wishlist-item';
+                    wishlistItem.innerHTML = `
+                        <div class="wishlist-item-image">
+                            <img src="${item.product.image}" alt="${item.product.name}">
+                        </div>
+                        <div class="wishlist-item-details">
+                            <h3>${item.product.name}</h3>
+                            <p class="item-price">$${item.product.price}</p>
+                            <div class="item-actions">
+                                <button class="btn add-to-cart-from-wishlist" data-id="${item.product._id}">Add to Cart</button>
+                                <button class="btn-secondary remove-from-wishlist" data-id="${item.product._id}">Remove</button>
+                            </div>
+                        </div>
+                    `;
+                    wishlistItemsList.appendChild(wishlistItem);
+                });
+
+
+                // Add event listeners with error handling
+                document.querySelectorAll('.add-to-cart-from-wishlist').forEach(btn => {
+                    btn.addEventListener('click', async function (e) {
+                        e.preventDefault();
+                        const id = this.getAttribute('data-id');
+                        try {
+                            const success = await addToCartSafe(id, 1);
+                            if (success) {
+                                // Optionally refresh the wishlist to show updated state
+                                setTimeout(() => {
+                                    loadWishlist();
+                                }, 1000);
+                            }
+                        } catch (error) {
+                            console.error('Add to cart from wishlist error:', error);
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.remove-from-wishlist').forEach(btn => {
+                    btn.addEventListener('click', async function (e) {
+                        e.preventDefault();
+                        const id = this.getAttribute('data-id');
+                        try {
+                            const success = await removeFromWishlistSafe(id);
+                            if (success) {
+                                // Refresh the wishlist display
+                                await loadWishlist();
+                            }
+                        } catch (error) {
+                            console.error('Remove from wishlist error:', error);
+                        }
+                    });
+                });
+
+            } catch (error) {
+                console.error('wishlist.html loadWishlist: Error loading wishlist:', error);
+                showToast('Failed to load wishlist', 'error');
+            }
+        }
+
+
+
+
+        // Load wishlist when page loads
+        document.addEventListener('DOMContentLoaded', async function () {
+            await initializeApp();
+            await loadWishlist();
+        });
+    </script>
+</body>
+
+</html>

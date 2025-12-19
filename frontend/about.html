@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - StyleShop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="index.html">StyleShop</a>
+                </div>
+                <nav>
+                    <ul id="menu-items">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html" class="active">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-icons">
+                    <div class="user-profile" onclick="toggleUserDropdown()">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+                            alt="User" class="user-avatar">
+                        <div class="user-info-small">
+                            <span class="user-name">Mostafa Monsef</span>
+                            <span class="user-email">mostafa@example.com</span>
+                        </div>
+                        <div class="user-dropdown">
+                            <a href="profile.html">Profile</a>
+                            <!-- <a href="Account.html">My Account</a> -->
+                            <a href="#" onclick="logout()">Logout</a>
+                        </div>
+                    </div>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <div class="menu-icon" onclick="toggleMenu()">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="auth-modal">
+        <div class="auth-content">
+            <span class="close" onclick="hideAuthModal()">&times;</span>
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+                <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
+            </div>
+
+            <form id="login-form" class="auth-form active" onsubmit="login(event)">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+
+            <form id="register-form" class="auth-form" onsubmit="register(event)">
+                <div class="form-group">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" name="password" required>
+                </div>
+                <button type="submit" class="btn">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>About StyleShop</h1>
+            <p>Your trusted partner in fashion since 2010</p>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="our-story">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <h2>Our Story</h2>
+                    <p>Founded in 2010, StyleShop began as a small boutique in downtown New York with a simple mission:
+                        to make quality fashion accessible to everyone. What started as a single store has now grown
+                        into a global e-commerce platform serving millions of customers worldwide.</p>
+                    <p>We believe that everyone deserves to express their unique style without compromising on quality
+                        or breaking the bank. Our carefully curated collections feature the latest trends alongside
+                        timeless classics, all at prices that won't empty your wallet.</p>
+                    <a href="products.html" class="btn">Shop Our Collection</a>
+                </div>
+                <div class="col-2">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                        alt="Our Story">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values -->
+    <section class="our-values">
+        <div class="small-container">
+            <h2 class="title">Our Values</h2>
+            <div class="row">
+                <div class="col-4">
+                    <div class="value-card">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Sustainability</h3>
+                        <p>We're committed to sustainable practices and ethical sourcing across our supply chain.</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="value-card">
+                        <i class="fas fa-heart"></i>
+                        <h3>Quality</h3>
+                        <p>Every product is selected and tested to ensure it meets our high standards.</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="value-card">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <h3>Affordability</h3>
+                        <p>We believe great fashion should be accessible to everyone at reasonable prices.</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="value-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Community</h3>
+                        <p>We build relationships with our customers and support the communities we serve.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="small-container">
+            <h2 class="title">Meet Our Team</h2>
+            <div class="row">
+                <div class="col-4">
+                    <div class="team-card">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQAqgMBIgACEQEDEQH/xAAcAAEAAgMBAQEAAAAAAAAAAAAAAQcCAwYIBQT/xABGEAABAgQCBQgFBwoHAAAAAAABAAIDBAURBiEHEjFBURMiYXGBkrHSFEKRobIVIzI0UnJ0FiQzQ0RTYnOi0TVUZILB4fD/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAZEQEBAQADAAAAAAAAAAAAAAAAARESITH/2gAMAwEAAhEDEQA/ALpREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREsd6AiIgIiICIiAixa9rr6pDrHVNjex4LLegIiICIiAiIgIiICIiAiL51erMlQKXHqVSicnAgtva+bzua0byUHzcZYmg0GDKSzHNNQn4vJS8PgMtZ56Gj32X0aRNF8FsOO67gOa8+t0HpXnWexTM4hx3KVqdBawTDIcKEDcQod7Af1XJ4kq+qbYC20DL/tb49JXRItbHWA1s8lsWFEREBYRXWbYbSFk42yGbuCwiDUbltO9BSmIK7P4G0kvm4MSK6mVANix5a92vA5riB9oAAjrt1XVKTECcloUzKxWxYEZofDiNNw5p2FU3pxl2iDSpot+cEWJDDuy9vctOiHHjafHhYeqr7SkV9pWM79U8+oeg7uB6FVq70RFEEREBERARc5iHHGG8Pa0Op1OE2OP2eEeUid0bO2yr2tacmAOZQqQ553RZt9h12GfvQXL1L4Fcxrh2hB3yjVZdkRv6qG7XffhYXzXnmv4+xPX2uZPVOLCl3bZeV+aYeuxuR1krmQ0X2ZnMq4LmxBpwA1oeHaUHEbJiddl2Mbme0jqVYV7EVXxFMekVmdfHfe7WbGM+60ZBfJa256FkVcGcPWAOodV248CvS+Fp0VGjSk80aojQmuI4G2Y/9wXmlmSufRHVXRaOZCI6/Jk6hPBbiVasu/Xav0FhAvtHBfjkxzFujzkGWgRI0zGZBgw2lz4j3BrWgbSTuCxfVjaCDsQm2W87FVmItLchCmny1JlnzEFuXpBOprH+G4v2rosIaQaDXjDlmxnSs84ACBNOzeeDXbHHo2qYOxDNXP1loe/WNl+hzuOXWvzOFnF25FU5p0qDfSKdS2/SYHR4nRfIe3P2Kp72O/sXRY8qnyxiqoTYcXQ+VMOH0MbkPAntXOFUdphzSbiOhBkL0ls/Kty5GcGsbdDxYj39StDDulqgVTVhVLXpczsIjHWhnqeB4gLzzvWwZjj0Ij19LTEGagiNLRocaE7Y+G4OB7Qttl5JplVqFJiiLS52Zk4m28vFLL9YGR7QV3tD0xVyS1YdWgQKjDG17RyUT3c0nsClgvlFwlF0sYWqJa2amYlOin1ZptmX++MvbZdfDqtNiw2xIVRk3seA5rmzDCCDsIN1MHkOPd0xGcTm6I434m6xstkYWjP++7xWC2iEcQG9KlQ4BBm0WAup3rW15GRzW1FBkVYGiOb5KtOguPNe23aq/XS6P3ubiaThB+qYj9W/vt1m1u1WD0gyNDhyznOza3bbwVM6T5mv1bWiRGPZTILrtlmXsLeu7idnUrljsa2CyCBmTmF8aryjGsu9oJc0h2tsskR5va3XG8kcF2OjzCL8Q1IRY9202VdrRYjRnFeDkxviT2bTly06GQJmd9GOtCZGeIeodwJtZekMLSkpTcPU+DJajocOXh2czY8kAl199zcpVbKeJ6SiPbFcZmU1+bf6bP7hTimpMp+G6hONP6OXcWnpIsF9SA20Pftuq3001R0pQIEjDOq6biWePtNGf/CyKRc4km+/MrU4LYTkFiqrUsmmyEKQERldFCIJFtu9d3SIbXUqScbZy7D9H+ELg9xXe0b/AAiR/Dw/hCDgZgWmYw3CI4D2laltmfrUx/Of8RWtEQozJsFJF9imEcyN4RWTWBvSVkilBivp4dn3Uut0+oNNvRpmHEd0tB5w7W3HavmlZwzZB6spcYTjTN2u1xOpf7PFcxpKrzKNQ4kZpvMR/mpcXzLt57F+zCFTbO4Tpb2HnxJcMcODhkfBVZpnqBmcUQ5BhHIyEEMAB9d2bj4DsViVxbLmXeTtOd1bmhmv8vIRqJNRCYkAcrL6x2tJzA6Abe1VNCsYLgeC+tgSe+TsXUqY1iGmMIL/ALr+b4kHsSrHpkECHdUBpfq4qWJYcCE68OUg2Nj67jcjsAb7VelTjCUpkeM64DGE9S8sVKaM5UJiZcb8rFc4Hovl7rKD8pWJWRWJQQgREEooG1SgHYrAozR8kSP4eH8IVfnYu/oxPyPI/h4fwhBX8z9aj/zX+JWpbZggzEXMfpHeJWtBCg5c4KQptdBsB1hdSFrhnVdY5ArYEBAbZncpUDbmEFxaFp90WXjSjn3Em/WDeDX5+IcqzxROGoYhqE2f1sy89gNh4L7WjOrNpVdmDFfaHHkYzTn6zRrtP9Lh/uXJQnOiNa9+bnC7j0qwr9sLOER0JAvCjsiMNixwcDwIIKQMhbesgw6jjbNWpF36Ua96Lgk8m/56chtbDO/nb+wXPYqAK6/SDWxVW0eXhPBhwJRhIH27W/v7VyBWVYlQpKhARR1WusgAAgKFPUiCFYdHsKRIj/Tw/hCr1WBS2k0yTIGXIM+EINUfA1O5eJ+dTv0neszyrD8h6d/m53vM8iIgwi4Jp7ACJqd7zPKsBgyQP7VOd5nlREG6FganPBJm5644PZ5V+huBqZYfnE4enXb5VCIJGCKZ++m++3yqTgil/vZvvt8qIgOwTTAwlsecabbREb5VMLBNNDebHmxkPXb5VKKxKzhYOkA/6zOd5nlUxMJSTQ60zN7Muczyoio/GMFSDm65nJ4kj7TPIo/Iin3+tz3eZ5ERZVD8E08D63O95nkWMPBNPLvrc73meVQiDYMD0+5/O57vM8ixfgqQBIE3O95nkREGUvginPcdaane8zyr9BwTS/3s132+VEQQcFUwD9LNd9vlXVyOG5KHJS7Gvj2bDaBzhw6kRB//2Q=="
+                            alt="Mostafa Monsef">
+                        <h3>Mostafa Monsef</h3>
+                        <p>CEO & Founder</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            alt="Michael Chen">
+                        <h3>Michael Chen</h3>
+                        <p>Head of Design</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            alt="Emily Rodriguez">
+                        <h3>Emily Rodriguez</h3>
+                        <p>Marketing Director</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            alt="David Kim">
+                        <h3>David Kim</h3>
+                        <p>Operations Manager</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <div class="stat-card">
+                        <h3 id="happy-customers">500K+</h3>
+                        <p>Happy Customers</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="stat-card">
+                        <h3 id="brand-partners">100+</h3>
+                        <p>Brand Partners</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="stat-card">
+                        <h3 id="countries-served">50+</h3>
+                        <p>Countries Served</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="stat-card">
+                        <h3 id="years-excellence">14 Years</h3>
+                        <p>Of Excellence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--  Footer -->
+    <footer class="footer-enhanced">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Get the best shopping experience on your mobile device.</p>
+                    <div class="app-logo">
+                        <a href="#" class="app-store-real">
+                            <i class="fab fa-google-play"></i>
+                            <div>
+                                <small>Get it on</small>
+                                <div>Google Play</div>
+                            </div>
+                        </a>
+                        <a href="#" class="app-store-real" style="background: #007aff;">
+                            <i class="fab fa-apple"></i>
+                            <div>
+                                <small>Download on the</small>
+                                <div>App Store</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <div class="logo">
+                        <a href="index.html" style="color: white; font-size: 28px;">StyleShop</a>
+                    </div>
+                    <p>Making premium fashion accessible to everyone. Quality, style, and affordability in one place.
+                    </p>
+                    <div class="social-links-enhanced">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li>About Us</li>
+                        <li>Contact</li>
+                        <li>Shipping Info</li>
+                        <li>Returns & Exchanges</li>
+                        <li>Size Guide</li>
+                        <li>FAQs</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <!-- <li>My Account</li> -->
+                        <li>Order Tracking</li>
+                        <li>Wishlist</li>
+                        <li>Terms & Conditions</li>
+                        <li>Privacy Policy</li>
+                        <li>Support Center</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="newsletter-section"
+                style="margin: 40px 0; padding: 30px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                <div class="row">
+                    <div class="col-2">
+                        <h3 style="margin: 0;">Stay Updated</h3>
+                        <p>Subscribe to our newsletter for the latest trends and exclusive offers.</p>
+                    </div>
+                    <div class="col-2">
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+                            <button type="submit" class="btn-gradient">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payment-section" style="text-align: center; margin: 30px 0;">
+                <h4 style="margin-bottom: 20px;">We Accept</h4>
+                <div class="payment-methods">
+                    <div class="payment-method">Visa</div>
+                    <div class="payment-method">MasterCard</div>
+                    <div class="payment-method">PayPal</div>
+                    <div class="payment-method">Apple Pay</div>
+                    <div class="payment-method">Google Pay</div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row" style="align-items: center;">
+                <div class="col-2">
+                    <p class="copyright">&copy; 2025 StyleShop. All rights reserved.</p>
+                </div>
+                <div class="col-2" style="text-align: right;">
+                    <p>Made with <i class="fas fa-heart" style="color: #ff523b;"></i> for fashion lovers</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Your Shopping Cart</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <h3>Total: $<span id="cart-total-price">0.00</span></h3>
+                <button id="checkout-btn" class="btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Animate stats counter
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target + (element.id === 'happy-customers' ? 'K+' :
+                        element.id === 'brand-partners' ? '+' :
+                            element.id === 'countries-served' ? '+' : ' Years');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start) + (element.id === 'happy-customers' ? 'K+' :
+                        element.id === 'brand-partners' ? '+' :
+                            element.id === 'countries-served' ? '+' : ' Years');
+                }
+            }, 16);
+        }
+
+
+        // Initialize stats animation when page loads
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Initialize app to check login status
+            await initializeApp();
+            await initializeScript();
+
+            // Wait a bit for the page to load
+            setTimeout(() => {
+                animateCounter(document.getElementById('happy-customers'), 500);
+                animateCounter(document.getElementById('brand-partners'), 100);
+                animateCounter(document.getElementById('countries-served'), 50);
+                // Years doesn't need animation
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>

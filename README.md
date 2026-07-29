@@ -1,5 +1,8 @@
 # StyleShop - Full-Stack E-commerce Application
 
+![License](https://img.shields.io/badge/license-MIT-blue.svg) ![Language](https://img.shields.io/badge/language-HTML-informational.svg) ![Last Commit](https://img.shields.io/github/last-commit/Alaashamel/2nd-phase-mlt-pr)
+
+
 A modern, responsive e-commerce platform built with Node.js, Express, MongoDB, and vanilla JavaScript. StyleShop provides a seamless shopping experience with features like product browsing, user authentication, shopping cart, and wishlist functionality.
 
 ## 🚀 Features
